@@ -1,0 +1,13 @@
+/__pycache__/
+/FingerImages/
+
+/FingerCounter.py
+/HandTrackingModule.py
+
+echo "# Hand-Calculator" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/FinlayHare/Hand-Calculator.git
+git push -u origin main
