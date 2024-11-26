@@ -12,7 +12,9 @@ canvas=None
 while True:
     success, img = cap.read()
     img = cv2.flip(img, 1)
-    hands, img = detector.findHands(img, draw=False)
+    
+    hands, img = detector.findHands(img, flipType=False)
+    cv2.imshow('Hand', img)
     cv2.waitKey(1)
     
     
@@ -41,15 +43,19 @@ while True:
                 print([x,y])
                 cv2.circle(canvas, (x, y), 20, draw_color, -1)
                 
-            elif fingers == [0, 1, 1, 0, 0]:  # One finger
+            elif fingers == [0, 1, 1, 0, 0]:  # Two fingers
                 #print(lmList1[8][0:3])
                 x = int(lmList1[8][0])
                 y = int(lmList1[8][1])
                 print([x,y])
                 cv2.circle(canvas, (x, y), 60, erase, -1)
+            
+            elif fingers == [0, 1, 0, 0, 1]:
+                file_name = r'<C:\path\to\your\folder\filename.png or jpg or whatever>'  
+                cv2.imwrite(file_name, canvas)
+                print("saving")
                 
-                
-    combined = cv2.addWeighted(img, 0.5, canvas, 0.5, 0)
+    combined = canvas
     cv2.imshow('Hand Drawing', combined)
     if cv2.waitKey(1) & 0xFF == 27:
         break
